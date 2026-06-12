@@ -1,6 +1,9 @@
 * {
     margin: 0;
     padding: 0;
+    /* 开启硬件加速，优化动画性能 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 li {
@@ -30,6 +33,8 @@ body {
     position: relative;
     transform-style: preserve-3d;
     animation: spin 15s ease-in-out infinite;
+    /* 开启GPU加速，优化3D动画性能 */
+    will-change: transform;
 }
 
 .container>li {
@@ -40,56 +45,65 @@ body {
     position: absolute;
     top: 160px;
     left: 300px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .9)inset;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .9) inset;
     background: pink;
+    /* 图片背面隐藏，减少渲染压力 */
+    backface-visibility: hidden;
 }
 
 .container>li>img {
     width: 200px;
     height: 118px;
+    /* 图片平滑加载，避免突然闪现 */
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+/* 图片加载完成后显示 */
+.container>li>img[src] {
+    opacity: 1;
 }
 
 .container>li:nth-child(1) {
-    transform: rotateY(0deg)translateZ(300px);
+    transform: rotateY(0deg) translateZ(300px);
 }
 
 .container>li:nth-child(2) {
-    transform: rotateY(40deg)translateZ(300px);
+    transform: rotateY(40deg) translateZ(300px);
 }
 
 .container>li:nth-child(3) {
-    transform: rotateY(80deg)translateZ(300px);
+    transform: rotateY(80deg) translateZ(300px);
 }
 
 .container>li:nth-child(4) {
-    transform: rotateY(120deg)translateZ(300px);
+    transform: rotateY(120deg) translateZ(300px);
 }
 
 .container>li:nth-child(5) {
-    transform: rotateY(160deg)translateZ(300px);
+    transform: rotateY(160deg) translateZ(300px);
 }
 
 .container>li:nth-child(6) {
-    transform: rotateY(200deg)translateZ(300px);
+    transform: rotateY(200deg) translateZ(300px);
 }
 
 .container>li:nth-child(7) {
-    transform: rotateY(240deg)translateZ(300px);
+    transform: rotateY(240deg) translateZ(300px);
 }
 
 .container>li:nth-child(8) {
-    transform: rotateY(280deg)translateZ(300px);
+    transform: rotateY(280deg) translateZ(300px);
 }
 
 .container>li:nth-child(9) {
-    transform: rotateY(320deg)translateZ(300px);
+    transform: rotateY(320deg) translateZ(300px);
 }
 
 @keyframes spin {
     from {
         transform: rotateY(0deg);
     }
-
     to {
         transform: rotateY(360deg);
     }
